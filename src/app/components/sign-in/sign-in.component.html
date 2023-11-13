@@ -1,1 +1,21 @@
-<p>sign-in works!</p>
+<p-card header="Angular interview" subheader="Sign in">
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <div class="p-float-label">
+      <input
+        pInputText
+        id="username"
+        [formControl]="signInForm.controls.username"
+      />
+      <label htmlFor="username">Username</label>
+    </div>
+
+    <span class="p-float-label">
+      <p-password
+        [formControl]="signInForm.controls.password"
+        [feedback]="false"
+      ></p-password>
+      <label htmlFor="password">Password</label>
+    </span>
+    <p-button type="submit" label="Login" icon="pi pi-check"></p-button>
+  </form>
+</p-card>
