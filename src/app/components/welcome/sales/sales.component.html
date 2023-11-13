@@ -5,16 +5,33 @@
 >
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th *ngFor="let col of columns">
-        {{ col.header }}
-      </th>
+      <ng-container *ngFor="let col of columns">
+        <th
+          [rowSpan]="col.subHeaders ? 1 : 2"
+          [colSpan]="col.subHeaders?.length ?? 1"
+          [pSortableColumn]="col.field"
+        >
+          {{ col.header }}
+          <p-sortIcon field="code"></p-sortIcon>
+        </th>
+      </ng-container>
     </tr>
+    <ng-container *ngFor="let col of columns">
+      <tr *ngIf="col.subHeaders">
+        <th *ngFor="let sub of col.subHeaders">{{ sub.header }}</th>
+      </tr>
+    </ng-container>
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr>
-      <td *ngFor="let col of columns">
-        {{ rowData[col.field] }}
-      </td>
+      <ng-container *ngFor="let col of columns">
+        <td *ngIf="!col.subHeaders">
+          {{ rowData[col.field] }}
+        </td>
+        <td *ngFor="let sub of col.subHeaders">
+          {{ rowData[sub.field] }}
+        </td>
+      </ng-container>
     </tr>
   </ng-template>
 </p-table>

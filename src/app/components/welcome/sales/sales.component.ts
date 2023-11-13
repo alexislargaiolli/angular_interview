@@ -16,4 +16,6 @@ export class SalesComponent {
   columns = this.productsService.columns;
 
   constructor(private productsService: ProductsService) {}
+
+  protected readonly Number = Number;
 }
