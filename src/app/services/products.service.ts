@@ -1,14 +1,28 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ProductsDto } from './dto/products.dto';
+import { Injectable, signal } from '@angular/core';
+import { ProductsApiService } from './products-api.service';
+import { Product, ProductColumn } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor(private httpClient: HttpClient) {}
+  private _products = signal<Product[]>([]);
+  private _columns = signal<ProductColumn[]>([]);
 
-  getProducts() {
-    return this.httpClient.get<ProductsDto>('/assets/potato_sales.json');
+  constructor(private productsApiService: ProductsApiService) {}
+
+  public loadProducts() {
+    this.productsApiService.getProducts().subscribe((products) => {
+      this._products.set(products.data);
+      this._columns.set(products.column);
+    });
+  }
+
+  get products() {
+    return this._products.asReadonly();
+  }
+
+  get columns() {
+    return this._columns.asReadonly();
   }
 }

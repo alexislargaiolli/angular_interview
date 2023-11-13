@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { authenticatedGuard } from './guards/authenticated.guard';
+import { inject } from '@angular/core';
+import { ProductsService } from './services/products.service';
 
 export const routes: Routes = [
   {
@@ -8,6 +10,12 @@ export const routes: Routes = [
       import('./components/welcome/welcome.component').then(
         (m) => m.WelcomeComponent,
       ),
+    resolve: [
+      () => {
+        inject(ProductsService).loadProducts();
+      },
+    ],
+    canActivate: [authenticatedGuard],
     children: [
       {
         path: 'new-product',
@@ -29,7 +37,6 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
     ],
-    canActivate: [authenticatedGuard],
   },
   {
     path: 'sign-in',

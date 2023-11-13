@@ -1,9 +1,9 @@
 export interface ProductsDto {
-  columns: HeaderDto[];
+  column: ProductColumnDto[];
   data: ProductDto[];
 }
 
-export interface HeaderDto {
+export interface ProductColumnDto {
   header: string;
   field?: string;
   subHeaders?: {
