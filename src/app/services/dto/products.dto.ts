@@ -13,7 +13,7 @@ export interface ProductColumnDto {
 }
 
 export interface ProductDto {
-  productID: string;
+  productID: number;
   productName: string;
   salesQ1: number;
   salesQ2: number;

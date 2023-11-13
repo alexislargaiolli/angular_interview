@@ -1,1 +1,54 @@
-<p>new-product works!</p>
+<p-toast></p-toast>
+<p-card header="New product">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label htmlFor="productName">Product name</label>
+      <input
+        pInputText
+        id="productName"
+        [formControl]="productForm.controls.productName"
+      />
+    </div>
+
+    <div>
+      <label htmlFor="productId">Product ID</label>
+      <p-inputNumber
+        inputId="productId"
+        [formControl]="productForm.controls.productId"
+      >
+      </p-inputNumber>
+    </div>
+
+    <div>
+      <label htmlFor="productName">Product manager</label>
+      <input
+        pInputText
+        id="productManager"
+        [formControl]="productForm.controls.productManager"
+      />
+    </div>
+
+    <div>
+      <label htmlFor="productName">Sales start date</label>
+      <p-calendar
+        [formControl]="productForm.controls.salesStartDate"
+      ></p-calendar>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button
+      (click)="onSubmit()"
+      [disabled]="productForm.invalid"
+      type="submit"
+      label="Submit"
+      icon="pi pi-check"
+    ></p-button>
+    <p-button
+      (click)="productForm.reset()"
+      label="clear"
+      icon="pi pi-times"
+      styleClass="p-button-secondary"
+      [style]="{ 'margin-left': '.5em' }"
+    ></p-button>
+  </ng-template>
+</p-card>

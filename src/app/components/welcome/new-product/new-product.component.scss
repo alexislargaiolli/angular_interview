@@ -1,0 +1,17 @@
+:host{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem ;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}
