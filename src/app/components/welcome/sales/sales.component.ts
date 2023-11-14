@@ -31,9 +31,11 @@ export class SalesComponent {
   products = this.productsService.products;
   columns = this.productsService.columns;
   searchableColumns: Signal<string[]> = computed(() =>
-    this.columns()
-      .filter((column) => column.field)
-      .map((column) => column.field as string),
+    this.columns().flatMap((column) =>
+      column.subHeaders != null
+        ? column.subHeaders.map((s) => s.field)
+        : (column.field as string),
+    ),
   );
 
   constructor(private productsService: ProductsService) {}
