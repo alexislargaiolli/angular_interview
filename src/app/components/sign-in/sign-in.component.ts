@@ -55,6 +55,7 @@ export class SignInComponent {
               severity: 'error',
               summary: 'Authentication failed',
               detail: 'Try to use username: username and password: password.',
+              id: 'authentication-failed-message',
             },
           ];
         }
