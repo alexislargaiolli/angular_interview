@@ -41,15 +41,11 @@ export class NewProductComponent {
       nonNullable: true,
       validators: [Validators.required, Validators.maxLength(50)],
     }),
-    productId: new FormControl<number>(0, {
+    productId: new FormControl<number | null>(null, {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(13),
-        Validators.maxLength(13),
-      ],
+      validators: [Validators.required, Validators.pattern(/^\d{13}$/)],
     }),
-    productManager: new FormControl<string>(''),
+    productManager: new FormControl<string>('', Validators.maxLength(30)),
     salesStartDate: new FormControl<Date>(new Date(), Validators.required),
   });
 
@@ -63,7 +59,7 @@ export class NewProductComponent {
       this.productService
         .addProduct(
           this.productForm.controls.productName.value,
-          this.productForm.controls.productId.value,
+          this.productForm.controls.productId.value as number,
         )
         .subscribe(() => {
           this.productForm.reset();

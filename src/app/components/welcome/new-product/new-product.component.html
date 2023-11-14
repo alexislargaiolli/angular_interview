@@ -27,11 +27,18 @@
     <div class="field">
       <label htmlFor="productId">Product ID</label>
       <p-inputMask
+        inputId="productId"
         mask="9999999999999"
         [formControl]="productForm.controls.productId"
+        [autoClear]="false"
         placeholder="0000000000000"
       ></p-inputMask>
       <ng-container *ngIf="productForm.controls.productId.dirty">
+        <small
+          class="p-error block"
+          *ngIf="productForm.controls.productId.hasError('pattern')"
+          >Product ID should be 13 digits
+        </small>
         <small
           class="p-error block"
           *ngIf="productForm.controls.productId.hasError('required')"
@@ -47,11 +54,19 @@
         id="productManager"
         [formControl]="productForm.controls.productManager"
       />
+      <small
+        class="p-error block"
+        *ngIf="
+          productForm.controls.productManager.getError('maxlength') as error
+        "
+        >Max length is {{ error.requiredLength }}
+      </small>
     </div>
 
     <div class="field">
       <label htmlFor="productName">Sales start date</label>
       <p-calendar
+        inputId="salesStartDate"
         [formControl]="productForm.controls.salesStartDate"
         class="block"
       ></p-calendar>
