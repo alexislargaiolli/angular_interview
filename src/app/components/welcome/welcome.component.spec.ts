@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WelcomeComponent } from './welcome.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('WelcomeComponent', () => {
   let component: WelcomeComponent;
@@ -8,7 +9,7 @@ describe('WelcomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [WelcomeComponent],
+      imports: [WelcomeComponent, RouterTestingModule],
     });
     fixture = TestBed.createComponent(WelcomeComponent);
     component = fixture.componentInstance;
