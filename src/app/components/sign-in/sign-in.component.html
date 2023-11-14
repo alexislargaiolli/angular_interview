@@ -1,7 +1,7 @@
 <p-card
   header="Angular interview"
   subheader="Sign in"
-  [style]="{ width: '360px' }"
+  [style]="{ 'min-width': '360px' }"
 >
   <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
     <div class="field">
@@ -34,6 +34,13 @@
         </small>
       </ng-container>
     </div>
+
+    <p-messages
+      [(value)]="validationMessages"
+      [enableService]="false"
+      [closable]="false"
+    ></p-messages>
+
     <p-button type="submit" label="Login" icon="pi pi-check"></p-button>
   </form>
 </p-card>

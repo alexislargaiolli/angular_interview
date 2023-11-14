@@ -12,6 +12,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { MessagesModule } from 'primeng/messages';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-sign-in',
@@ -23,6 +25,7 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
     InputTextModule,
     PasswordModule,
+    MessagesModule,
   ],
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
@@ -33,6 +36,7 @@ export class SignInComponent {
     username: new FormControl<string>('', Validators.required),
     password: new FormControl<string>('', Validators.required),
   });
+  validationMessages: Message[] = [];
 
   constructor(
     private authService: AuthService,
@@ -42,8 +46,18 @@ export class SignInComponent {
   onSubmit() {
     const { username, password } = this.signInForm.value;
     if (this.signInForm.valid && username && password) {
-      this.authService.login(username, password).subscribe(() => {
-        this.router.navigate(['/']);
+      this.authService.login(username, password).subscribe((authenticated) => {
+        if (authenticated) {
+          this.router.navigate(['/']);
+        } else {
+          this.validationMessages = [
+            {
+              severity: 'error',
+              summary: 'Authentication failed',
+              detail: 'Try to use username: username and password: password.',
+            },
+          ];
+        }
       });
     } else {
       this.signInForm.markAllAsTouched();
