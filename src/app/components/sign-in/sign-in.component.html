@@ -1,21 +1,39 @@
-<p-card header="Angular interview" subheader="Sign in">
+<p-card
+  header="Angular interview"
+  subheader="Sign in"
+  [style]="{ width: '360px' }"
+>
   <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-    <div class="p-float-label">
+    <div class="field">
+      <label htmlFor="username">Username</label>
       <input
         pInputText
         id="username"
         [formControl]="signInForm.controls.username"
       />
-      <label htmlFor="username">Username</label>
+      <ng-container *ngIf="signInForm.controls.username.dirty">
+        <small
+          class="p-error block"
+          *ngIf="signInForm.controls.username.hasError('required')"
+          >Username is required
+        </small>
+      </ng-container>
     </div>
 
-    <span class="p-float-label">
+    <div class="field">
+      <label htmlFor="password">Password</label>
       <p-password
         [formControl]="signInForm.controls.password"
         [feedback]="false"
       ></p-password>
-      <label htmlFor="password">Password</label>
-    </span>
+      <ng-container *ngIf="signInForm.controls.password.dirty">
+        <small
+          class="p-error block"
+          *ngIf="signInForm.controls.password.hasError('required')"
+          >Password is required
+        </small>
+      </ng-container>
+    </div>
     <p-button type="submit" label="Login" icon="pi pi-check"></p-button>
   </form>
 </p-card>

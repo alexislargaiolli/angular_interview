@@ -8,11 +8,6 @@
 form {
   display: grid;
   gap: 1rem;
-  & > div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
 }
 
 .p-inputtext, .p-calendar{

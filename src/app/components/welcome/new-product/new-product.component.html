@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <p-card header="Create new product" [style]="{ width: '360px' }">
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-    <div>
+    <div class="field">
       <label htmlFor="productName">Product name</label>
       <input
         pInputText
@@ -24,7 +24,7 @@
       </ng-container>
     </div>
 
-    <div>
+    <div class="field">
       <label htmlFor="productId">Product ID</label>
       <p-inputMask
         mask="9999999999999"
@@ -40,7 +40,7 @@
       </ng-container>
     </div>
 
-    <div>
+    <div class="field">
       <label htmlFor="productName">Product manager</label>
       <input
         pInputText
@@ -49,7 +49,7 @@
       />
     </div>
 
-    <div>
+    <div class="field">
       <label htmlFor="productName">Sales start date</label>
       <p-calendar
         [formControl]="productForm.controls.salesStartDate"
