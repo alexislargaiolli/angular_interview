@@ -14,6 +14,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ProductsService } from '../../../services/products.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @Component({
   selector: 'app-new-product',
@@ -27,6 +28,7 @@ import { MessageService } from 'primeng/api';
     ButtonModule,
     CalendarModule,
     ToastModule,
+    InputMaskModule,
   ],
   providers: [MessageService],
   templateUrl: './new-product.component.html',
@@ -37,11 +39,15 @@ export class NewProductComponent {
   productForm = new FormGroup({
     productName: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required],
+      validators: [Validators.required, Validators.maxLength(50)],
     }),
     productId: new FormControl<number>(0, {
       nonNullable: true,
-      validators: [Validators.required],
+      validators: [
+        Validators.required,
+        Validators.minLength(13),
+        Validators.maxLength(13),
+      ],
     }),
     productManager: new FormControl<string>(''),
     salesStartDate: new FormControl<Date>(new Date(), Validators.required),

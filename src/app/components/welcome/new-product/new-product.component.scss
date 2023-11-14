@@ -10,8 +10,11 @@ form {
   gap: 1rem;
   & > div {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.25rem;
   }
+}
+
+.p-inputtext, .p-calendar{
+  width: 100%;
 }

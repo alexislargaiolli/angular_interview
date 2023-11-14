@@ -1,5 +1,5 @@
 <p-toast></p-toast>
-<p-card header="New product">
+<p-card header="Create new product" [style]="{ width: '360px' }">
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div>
       <label htmlFor="productName">Product name</label>
@@ -8,15 +8,36 @@
         id="productName"
         [formControl]="productForm.controls.productName"
       />
+      <ng-container *ngIf="productForm.controls.productName.dirty">
+        <small
+          class="p-error block"
+          *ngIf="
+            productForm.controls.productName.getError('maxlength') as error
+          "
+          >Max length is {{ error.requiredLength }}
+        </small>
+        <small
+          class="p-error block"
+          *ngIf="productForm.controls.productName.hasError('required')"
+          >Product name is required
+        </small>
+      </ng-container>
     </div>
 
     <div>
       <label htmlFor="productId">Product ID</label>
-      <p-inputNumber
-        inputId="productId"
+      <p-inputMask
+        mask="9999999999999"
         [formControl]="productForm.controls.productId"
-      >
-      </p-inputNumber>
+        placeholder="0000000000000"
+      ></p-inputMask>
+      <ng-container *ngIf="productForm.controls.productId.dirty">
+        <small
+          class="p-error block"
+          *ngIf="productForm.controls.productId.hasError('required')"
+          >Product ID is required
+        </small>
+      </ng-container>
     </div>
 
     <div>
@@ -32,7 +53,15 @@
       <label htmlFor="productName">Sales start date</label>
       <p-calendar
         [formControl]="productForm.controls.salesStartDate"
+        class="block"
       ></p-calendar>
+      <ng-container *ngIf="productForm.controls.salesStartDate.dirty">
+        <small
+          class="p-error block"
+          *ngIf="productForm.controls.salesStartDate.hasError('required')"
+          >Sales start date is required
+        </small>
+      </ng-container>
     </div>
   </form>
   <ng-template pTemplate="footer">

@@ -4,7 +4,6 @@ import {
   computed,
   Signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ProductsService } from '../../../services/products.service';
 import { InputTextModule } from 'primeng/inputtext';
@@ -16,7 +15,6 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-sales',
   standalone: true,
   imports: [
-    CommonModule,
     TableModule,
     InputTextModule,
     ButtonModule,
