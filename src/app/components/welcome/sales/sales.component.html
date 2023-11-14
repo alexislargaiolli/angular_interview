@@ -39,13 +39,16 @@
           [pSortableColumn]="col.field"
         >
           {{ col.header }}
-          <p-sortIcon field="code"></p-sortIcon>
+          <p-sortIcon field="code" *ngIf="!col.subHeaders"></p-sortIcon>
         </th>
       </ng-container>
     </tr>
     <ng-container *ngFor="let col of columns">
       <tr *ngIf="col.subHeaders">
-        <th *ngFor="let sub of col.subHeaders">{{ sub.header }}</th>
+        <th *ngFor="let sub of col.subHeaders" [pSortableColumn]="sub.field">
+          {{ sub.header }}
+          <p-sortIcon field="code"></p-sortIcon>
+        </th>
       </tr>
     </ng-container>
   </ng-template>
