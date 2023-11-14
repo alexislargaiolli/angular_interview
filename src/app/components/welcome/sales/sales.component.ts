@@ -9,11 +9,20 @@ import { TableModule } from 'primeng/table';
 import { ProductsService } from '../../../services/products.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sales',
   standalone: true,
-  imports: [CommonModule, TableModule, InputTextModule, ButtonModule],
+  imports: [
+    CommonModule,
+    TableModule,
+    InputTextModule,
+    ButtonModule,
+    RippleModule,
+    FormsModule,
+  ],
   templateUrl: './sales.component.html',
   styleUrls: ['./sales.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,7 +37,4 @@ export class SalesComponent {
   );
 
   constructor(private productsService: ProductsService) {}
-
-  protected readonly Number = Number;
-  protected readonly HTMLInputElement = HTMLInputElement;
 }
