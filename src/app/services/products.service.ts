@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { ProductsApiService } from './products-api.service';
 import { Product, ProductColumn } from '../models/product.model';
 import { Observable, of } from 'rxjs';
@@ -9,6 +9,23 @@ import { Observable, of } from 'rxjs';
 export class ProductsService {
   private _products = signal<Product[]>([]);
   private _columns = signal<ProductColumn[]>([]);
+
+  public readonly products = computed(() =>
+    this._products().map((product) => ({
+      ...product,
+      totalSales:
+        product.salesQ1 + product.salesQ2 + product.salesQ3 + product.salesQ4,
+    })),
+  );
+
+  public readonly columns = computed(() =>
+    this._columns().map((product) => {
+      if (product.header === 'Total sales') {
+        return { ...product, field: 'totalSales' };
+      }
+      return product;
+    }),
+  );
 
   constructor(private productsApiService: ProductsApiService) {}
 
@@ -35,13 +52,5 @@ export class ProductsService {
       return [...products, product];
     });
     return of(product);
-  }
-
-  get products() {
-    return this._products.asReadonly();
-  }
-
-  get columns() {
-    return this._columns.asReadonly();
   }
 }
